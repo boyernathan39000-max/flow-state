@@ -1,5 +1,5 @@
 // Service worker de Flow State : l'app s'ouvre même sans réseau.
-const VERSION = "flow-state-v1";
+const VERSION = "flow-state-v2";
 const SHELL = ["./", "index.html", "app.js", "logic.js", "content.js", "manifest.webmanifest", "icons/icon-192.png", "icons/apple-touch-icon.png"];
 
 self.addEventListener("install", (e) => {

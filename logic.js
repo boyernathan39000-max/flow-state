@@ -61,11 +61,21 @@ export function palierCode(s) {
   return "P5";
 }
 
-export function screenTarget(s) {
-  if (s <= "2026-11-15") return 4;
-  if (s <= "2026-12-26") return 3;
-  if (s <= "2027-02-28") return 2.5;
-  return 2;
+// Objectif de temps d'écran : 6 h par jour maximum (décision du 25 octobre 2026).
+export function screenTarget() {
+  return 6;
+}
+
+export const PAGES_MIN = 4;
+
+// Loi du jour : les 10 lois tournent, une par jour depuis le départ.
+export function loiIndex(s) {
+  return ((diffDays(START, s) % 10) + 10) % 10;
+}
+
+// Sujet d'anglais du jour : rotation sur la liste des sujets depuis le départ.
+export function sujetIndex(s, n) {
+  return ((diffDays(START, s) % n) + n) % n;
 }
 
 export function isoWeekId(s) {
@@ -79,20 +89,30 @@ export function isoWeekId(s) {
 
 const filled = (v) => typeof v === "string" && v.trim().length > 0;
 
-// Score d'une journée sur 11 éléments.
+// Score d'une journée sur 11 éléments (version 2, 25 octobre 2026).
 export function dayScore(day, s) {
   const d = day || {};
   const r = d.rituel || {};
   const b = d.bilan || {};
-  const ecranOk = typeof d.ecran === "number" && d.ecran <= screenTarget(s);
+  const soc = d.social || {};
   const items = [
-    !!r.anglais, !!r.lecture, !!r.ecriture,
+    d.matin === true,
+    !!r.anglais,
+    typeof d.pages === "number" && d.pages >= PAGES_MIN,
+    d.carnet === true,
     b.je === true, b.regard === true, b.franc === true, b.defi === true,
-    filled(d.notion), filled(d.avis),
-    d.coucher === true, ecranOk,
+    !!(soc.amis || soc.nouveaux),
+    typeof d.ecran === "number" && d.ecran <= screenTarget(s),
+    d.coucher === true,
   ];
   const done = items.filter(Boolean).length;
   return { done, total: items.length, pct: Math.round((done / items.length) * 100) };
+}
+
+// Une journée est « notée » quand les quatre questions du bilan ont une réponse.
+export function isNoted(day) {
+  const b = (day || {}).bilan || {};
+  return ["je", "regard", "franc", "defi"].every((k) => typeof b[k] === "boolean");
 }
 
 export const SEUIL_REUSSITE = 80;

@@ -126,6 +126,48 @@ nav.tabs button.on::before{background:var(--accent)}
 .lock img{width:96px;height:96px;border-radius:22px}
 .lock input{text-align:center;font-size:24px;letter-spacing:.3em}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 84px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:.9rem;font-weight:600;z-index:9}
+/* v2 : matin en stories, soir simplifié, briefing en étapes */
+.stories{min-height:calc(100dvh - 150px);display:flex;flex-direction:column;gap:18px;max-width:430px;margin:0 auto;cursor:pointer;user-select:none}
+.dots{display:flex;gap:6px}
+.dots i{flex:1;height:4px;border-radius:2px;background:var(--line)}
+.dots i.on{background:var(--accent)}
+.story{flex:1;display:flex;flex-direction:column;justify-content:center;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:28px 24px;color:var(--ink)}
+.story .ic{color:var(--accent)}
+.story small{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700}
+.story .big{font-family:var(--display);font-weight:800;font-size:2rem;line-height:1.12;margin:0;text-wrap:balance}
+.story .conseil{margin:0;color:var(--muted);font-size:1.02rem}
+.story.alert{background:#8A3B1E;border-color:#8A3B1E;color:#F6EDE7}
+.story.alert .ic,.story.alert small{color:#F6EDE7}
+.story.go{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.story.go .ic,.story.go small{color:var(--on-accent)}
+.btn.light{background:var(--on-accent);color:var(--ink)}
+.tap{text-align:center;font-size:12px;color:var(--muted);margin:0;min-height:16px}
+.streak{display:flex;align-items:baseline;gap:10px;background:var(--accent);color:var(--on-accent);border-radius:var(--r);padding:12px 16px}
+.streak strong{font-family:var(--display);font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums}
+.streak span{font-size:.92rem}
+.row-ic{grid-template-columns:auto 1fr;align-items:center;gap:14px}
+.row-ic .ic{color:var(--accent)}
+.mini strong.sm{font-size:1.05rem;line-height:1.25}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--field);border-radius:999px;padding:9px 14px;font-size:.95rem;font-weight:600;color:var(--muted)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.stepper{display:grid;grid-template-columns:48px 1fr 48px;gap:8px}
+.stepper button{border:1px solid var(--line);background:var(--field);border-radius:12px;font-size:22px;font-weight:700}
+.stepper input{text-align:center}
+.btn.sm{padding:10px 14px;font-size:.9rem;display:flex;align-items:center;justify-content:center;gap:8px}
+label.btn{cursor:pointer}
+.step{grid-template-columns:34px 1fr;align-items:start}
+.step .num{width:30px;height:30px;border-radius:50%;background:var(--accent2);color:var(--on-accent);display:grid;place-items:center;font-weight:700}
+.step.done .num{background:var(--accent)}
+.stepbody{display:grid;gap:8px}
+.step.done .stepbody > b{text-decoration:line-through;color:var(--muted)}
+.gate{display:grid;gap:14px;justify-items:center;text-align:center;padding:40px 8px}
+.gate .ic{color:var(--accent2)}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.row3 strong{display:block;font-family:var(--display);font-size:1.6rem}
+.row3 span{font-size:.82rem;color:var(--muted)}
+nav.tabs button.pulse{color:var(--warn)}
+nav.tabs button.pulse::before{background:var(--warn)}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 </style>
 </head>
